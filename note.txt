@@ -16,3 +16,8 @@ until  response.xpath('//*[@id="0"]/div/table/tbody/tr[...XX...]/td/text()').get
 
 iterate till
 response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall() length
+
+
+Latest Update
+================
+response.xpath('//*[@id="614137682"]/div/table/tbody/tr[3]/td[1]/text()').getall()[0]
