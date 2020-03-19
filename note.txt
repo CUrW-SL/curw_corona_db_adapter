@@ -1,0 +1,18 @@
+Patient Data
+================
+
+headers
+-------
+response.xpath('//*[@id="0"]/div/table/tbody/tr[1]/td/text()').getall()
+
+cell range including headers
+-----------------------------
+left top ::: //*[@id="0"]/div/table/tbody/tr[1]/td[1]
+right top ::: //*[@id="0"]/div/table/tbody/tr[1]/td[17]
+
+row condition:
+---------------
+until  response.xpath('//*[@id="0"]/div/table/tbody/tr[...XX...]/td/text()').getall() returns empty list
+
+iterate till
+response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall() length
