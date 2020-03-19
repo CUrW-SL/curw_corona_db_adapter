@@ -34,12 +34,13 @@ class IFSSpider(scrapy.Spider):
 
         data = ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, Detected_Prefecture, Status, Notes']
 
-        length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[0])
+        length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
 
-        for i in range (1, length+2):
+        for i in range(3, length+2):
             row = []
             for j in col_index:
                 list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
+                print(list)
                 if len(list) > 0:
                     row.append(list[0])
                 else:
