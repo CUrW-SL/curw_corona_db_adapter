@@ -27,7 +27,7 @@ class IFSSpider(scrapy.Spider):
         file_name = ("IFS_{}".format(response.xpath('//*[@id="614137682"]/div/table/tbody/tr[3]/td[1]/text()').getall()[0]))\
             .replace(":", "-").replace(", ", "_").replace(" ", "_")
 
-        col_index = [1, 2, 4, 5, 6, 7, 8, 9,11]
+        col_index = [1, 2, 6, 7, 8,5, 4, 9, 11]
 
         write_to_file(file_name, ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, '
                                   'Detected_Prefecture, Status, Notes', ''])
