@@ -45,7 +45,7 @@ class IFSSpider(scrapy.Spider):
             file_name = 'IFS.csv'
 
             col_index = [1, 2, 6, 7, 8, 5, 4, 9, 11]
-            data = ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, Detected_Prefecture, Status, Notes']
+            data = ['Patient_No, Confirmed_Date, Residence_City, Detected_City, Detected_Prefecture, Gender, Age, Status, Notes']
 
             length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
 
@@ -57,7 +57,10 @@ class IFSSpider(scrapy.Spider):
                     if len(list) > 0:
                         row.append("\"" + list[0]+ "\"")
                     else:
-                        row.append('null')
+                        if j==4:
+                            row.append(0)
+                        else:
+                            row.append('NULL')
 
                 data.append(','.join(row))
 
