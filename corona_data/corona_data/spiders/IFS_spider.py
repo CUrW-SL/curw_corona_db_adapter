@@ -72,7 +72,7 @@ class IFSSpider(scrapy.Spider):
 
             length = len(response.xpath('//*[@id="1399411442"]/div/table/tbody/tr/td[1]/text()').getall())
 
-            for i in range(3, length + 2):
+            for i in range(4, length + 2):
                 row = []
                 for j in prefecture_col_index:
                     list = response.xpath('//*[@id="1399411442"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
