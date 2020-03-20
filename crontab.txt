@@ -1,0 +1,2 @@
+# update curw_corona database
+*/5 * * * * /home/uwcc-admin/curw_corona_db_adapter/update_corona_data.sh >> /home/uwcc-admin/curw_corona_db_adapter/corona_updates.log

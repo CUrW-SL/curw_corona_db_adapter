@@ -40,7 +40,7 @@ class IFSSpider(scrapy.Spider):
         if db_last_update is not None and db_last_update == website_latest_update:
             return
         else:
-            append_to_file('latest_update.txt', [website_latest_update])
+            append_to_file('latest_update.txt', ['', website_latest_update])
 
             file_name = 'IFS.csv'
 
