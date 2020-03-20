@@ -12,6 +12,15 @@ def append_to_file(file_name, data):
         f.write('\n'.join(data))
 
 
+def read_last_line(filename):
+    with open(filename, 'r') as f:
+        lines = f.read().splitlines()
+        if len(lines) > 0:
+            return lines[-1]
+        else:
+            None
+
+
 class IFSSpider(scrapy.Spider):
     name = "ifs"
 
@@ -24,30 +33,34 @@ class IFSSpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        file_name = ("IFS_{}".format(response.xpath('//*[@id="614137682"]/div/table/tbody/tr[3]/td[1]/text()').getall()[0]))\
-            .replace(":", "-").replace(", ", "_").replace(" ", "_")
 
-        col_index = [1, 2, 6, 7, 8,5, 4, 9, 11]
+        db_last_update = read_last_line('latest_update.txt')
+        website_latest_update = response.xpath('//*[@id="614137682"]/div/table/tbody/tr[3]/td[1]/text()').getall()[0]
 
-        write_to_file(file_name, ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, '
-                                  'Detected_Prefecture, Status, Notes', ''])
+        if db_last_update is not None and db_last_update == website_latest_update:
+            return
+        else:
+            append_to_file('latest_update.txt', [website_latest_update])
 
-        data = ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, Detected_Prefecture, Status, Notes']
+            file_name = 'IFS.csv'
 
-        length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
+            col_index = [1, 2, 6, 7, 8, 5, 4, 9, 11]
+            data = ['Patient_No, Confirmed_Date, Age, Gender, Residence_City, Detected_City, Detected_Prefecture, Status, Notes']
 
-        for i in range(3, length+3):
-            row = []
-            for j in col_index:
-                list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
-                print(list)
-                if len(list) > 0:
-                    row.append(list[0])
-                else:
-                    row.append('')
+            length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
 
-            data.append(','.join(row))
+            for i in range(3, length+3):
+                row = []
+                for j in col_index:
+                    list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
+                    print(list)
+                    if len(list) > 0:
+                        row.append(list[0])
+                    else:
+                        row.append('None')
 
-        write_to_file(file_name, data)
+                data.append(','.join(row))
+
+            write_to_file(file_name, data)
 
 

@@ -45,7 +45,7 @@ if __name__=="__main__":
         pool = get_Pool(host=CURW_CORONA_HOST, user=CURW_CORONA_USERNAME, password=CURW_CORONA_PASSWORD,
                         port=CURW_CORONA_PORT, db=CURW_CORONA_DATABASE)
 
-        data = read_csv(os.path.join(ROOT_DIR, 'corona_data/IFS_Mar_20_2020_11-50_IST'))
+        data = read_csv(os.path.join(ROOT_DIR, 'corona_data/IFS.csv'))
 
         bulk_insert_patient_data_customized(pool=pool, data=data, upsert=True, Patient_No=True, Confirmed_Date=True,
                                             Residence_City=True, Detected_City=True, Detected_Prefecture=True,
