@@ -21,7 +21,7 @@ then
 
   # Update corona data
   echo "Update corona data ...."
-  ./update_corona_data.py >> corona_update.log 2>&1
+  ./update_covidsl_data.py >> covidsl_update.log 2>&1
 fi
 
 

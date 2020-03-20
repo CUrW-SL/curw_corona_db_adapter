@@ -1,0 +1,1 @@
+from .hospital_data import bulk_insert_hospital_data

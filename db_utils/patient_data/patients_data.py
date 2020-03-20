@@ -65,7 +65,7 @@ def insert_patient_data(pool, Patient_No, upsert=True, Confirmed_Date=None, Conf
         update_list.append("`Notes` = VALUES(`Notes`)")
 
     variables = ",".join(variable_list)
-    values = ",".join("%s" * len(value_list))
+    values = ",".join(["%s"] * len(value_list))
     updates = ",".join(update_list)
 
 
