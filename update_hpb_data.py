@@ -52,11 +52,13 @@ if __name__=="__main__":
 
         data = get_hpb_data()
 
-        bulk_insert_hospital_data(pool=pool, data=data.get('hospitals'), upsert=True, id=True, hospital_name=True, cumulative_local=True,
-                                      cumulative_foreign=True, treatment_local=True, treatment_foreign=True,
-                                      cumulative_total=True, treatment_total=True)
+        if data is not None:
 
-        insert_summary(pool=pool, data=data.get('summary'), upsert=True)
+            bulk_insert_hospital_data(pool=pool, data=data.get('hospitals'), upsert=True, id=True, hospital_name=True, cumulative_local=True,
+                                          cumulative_foreign=True, treatment_local=True, treatment_foreign=True,
+                                          cumulative_total=True, treatment_total=True)
+
+            insert_summary(pool=pool, data=data.get('summary'), upsert=True)
 
     except Exception as e:
         traceback.print_exc()
