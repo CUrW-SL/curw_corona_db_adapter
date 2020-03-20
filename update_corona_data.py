@@ -56,7 +56,8 @@ if __name__=="__main__":
         for i in range(len(data)):
             row = data[i]
             row[0] = int(row[0])
-            row[-3] = int(row[-3])
+            if row[-3] is not None:
+                row[-3] = int(row[-3])
             processed_data.append([None if v is 'None' else v for v in row])
 
 
