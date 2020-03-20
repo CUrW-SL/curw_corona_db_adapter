@@ -20,10 +20,12 @@ then
 
 
   # Update corona data
-  echo "Update corona data ...."
+  echo "Update from covidsl.com data ...."
   ./update_covidsl_data.py >> covidsl_update.log 2>&1
 fi
 
+echo "Update from hpb data ...."
+./update_hpb_data.py >> hpb_update.log 2>&1
 
 
 
