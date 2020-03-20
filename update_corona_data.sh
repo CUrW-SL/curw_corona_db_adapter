@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 cd /home/uwcc-admin/curw_corona_db_adapter/
-echo "Inside `pwd`"
-source venv/bin/activate
-cd corona_data
-scrapy crawl ifs
+#echo "Inside `pwd`"
+#source venv/bin/activate
+#cd corona_data
+#scrapy crawl ifs
 
 FILE_MODIFIED_TIME=$(date -r /home/uwcc-admin/curw_corona_db_adapter/corona_data/IFS.csv +%s)
 CURRENT=$(date +%s)

@@ -23,6 +23,7 @@ then
     pip install PyMySQL
     pip install Scrapy
     pip install DBUtils
+    pip install requests
 fi
 
 # Deactivating virtual environment
