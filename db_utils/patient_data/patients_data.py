@@ -72,13 +72,13 @@ def insert_patient_data(pool, Patient_No, upsert=True, Confirmed_Date=None, Conf
     try:
         with connection.cursor() as cursor:
             if upsert:
-                sql_statement = pre_sql_statement + "(" + variables + ") VALUES (" + values + ") ON DUPLICATE KEY UPDATE" \
+                sql_statement = pre_sql_statement + "(" + variables + ") VALUES (" + values + ") ON DUPLICATE KEY UPDATE " \
                                        + updates + ";"
             else:
                 sql_statement = pre_sql_statement + "(" + variables + ") VALUES (" + values + ");"
 
             print(sql_statement)
-            row_count = cursor.executemany(sql_statement, tuple(value_list))
+            row_count = cursor.execute(sql_statement, tuple(value_list))
 
         connection.commit()
         return row_count
@@ -88,3 +88,50 @@ def insert_patient_data(pool, Patient_No, upsert=True, Confirmed_Date=None, Conf
     finally:
         if connection is not None:
             connection.close()
+
+
+def bulk_insert_patient_data(pool, data, upsert=True):
+
+    """Patient_No, Confirmed_Date=None, Confined_Date=None, Symptoms_Start_Date=None,
+                        Symptoms_Start_Location=None, Residence_City=None, Detected_City=None, Detected_Prefecture=None,
+                        Gender=None, Age=None, Transmission_Type=None, Status=None, Notes=None"""
+
+    connection = pool.connection()
+
+    if upsert:
+        sql_statement = "INSERT INTO `curw_corona`.`patient_data` (`Patient_No`,`Confirmed_Date`,`Confined_Date`," \
+                        "`Symptoms_Start_Date`,`Symptoms_Start_Location`,`Residence_City`,`Detected_City`," \
+                        "`Detected_Prefecture`,`Gender`,`Age`,`Transmission_Type`,`Status`,`Notes`) VALUES " \
+                        "(%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s) ON DUPLICATE KEY UPDATE " \
+                        "`Confirmed_Date` = VALUES(`Confirmed_Date`),`Confined_Date` = VALUES(`Confined_Date`)," \
+                        "`Symptoms_Start_Date` = VALUES(`Symptoms_Start_Date`)," \
+                        "`Symptoms_Start_Location` = VALUES(`Symptoms_Start_Location`)," \
+                        "`Residence_City` = VALUES(`Residence_City`),`Detected_City` = VALUES(`Detected_City`)," \
+                        "`Detected_Prefecture` = VALUES(`Detected_Prefecture`),`Gender` = VALUES(`Gender`)," \
+                        "`Age` = VALUES(`Age`),`Transmission_Type` = VALUES(`Transmission_Type`)," \
+                        "`Status` = VALUES(`Status`),`Notes` = VALUES(`Notes`);"
+
+    else:
+        sql_statement = "INSERT INTO `curw_corona`.`patient_data` (`Patient_No`,`Confirmed_Date`,`Confined_Date`," \
+                        "`Symptoms_Start_Date`,`Symptoms_Start_Location`,`Residence_City`,`Detected_City`," \
+                        "`Detected_Prefecture`,`Gender`,`Age`,`Transmission_Type`,`Status`,`Notes`) VALUES " \
+                        "(%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s);"
+
+    print(sql_statement)
+
+    try:
+        with connection.cursor() as cursor:
+
+            row_count = cursor.executemany(sql_statement, data)
+
+        connection.commit()
+        return row_count
+    except Exception as exception:
+        connection.rollback()
+        traceback.print_exc()
+    finally:
+        if connection is not None:
+            connection.close()
+
+
+bulk_insert_patient_data(pool='', data='', upsert=False)
