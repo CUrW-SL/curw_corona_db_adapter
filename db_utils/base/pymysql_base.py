@@ -4,8 +4,6 @@ import pymysql
 import traceback
 from DBUtils.PooledDB import PooledDB
 
-from db_adapter.logger import logger
-
 
 def get_Pool(host, port, user, password, db):
 
@@ -39,7 +37,7 @@ def execute_read_query(pool, query, params):
         return None
     except Exception as ex:
         error_message = "Executing sql query {} with params {} failed".format(query, params)
-        logger.error(error_message)
+        print(error_message)
         traceback.print_exc()
     finally:
         if connection is not None:
@@ -65,7 +63,7 @@ def execute_write_query(pool, query, params):
     except Exception as ex:
         connection.rollback()
         error_message = "Executing sql query {} with params {} failed".format(query, params)
-        logger.error(error_message)
+        print(error_message)
         traceback.print_exc()
         return False
     finally:
