@@ -5,3 +5,6 @@ url = "http://www.hpb.health.gov.lk/api/get-current-statistical"
 
 response = requests.get(url)
 
+data = response.text
+
+print(data)
