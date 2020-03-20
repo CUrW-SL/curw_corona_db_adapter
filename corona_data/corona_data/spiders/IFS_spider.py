@@ -68,7 +68,7 @@ class IFSSpider(scrapy.Spider):
             write_to_file(patient_file_name, patient_data)
 
             prefecture_col_index = [1, 3, 4, 5]
-            prefecture_data = ['Prefecture', 'Cases', 'Recovered', 'Deaths']
+            prefecture_data = ['Prefecture, Cases, Recovered, Deaths']
 
             length = len(response.xpath('//*[@id="1399411442"]/div/table/tbody/tr/td[1]/text()').getall())
 
