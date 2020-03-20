@@ -96,7 +96,7 @@ def bulk_insert_hospital_data(pool, data, upsert=True, id=True, hospital_name=Fa
 
     connection = pool.connection()
 
-    pre_sql_statement = "INSERT INTO `curw_corona`.`patient_data` "
+    pre_sql_statement = "INSERT INTO `curw_corona`.`hospital_data` "
 
     variable_list = []
     value_list = []
