@@ -102,7 +102,7 @@ def bulk_insert_patient_data(pool, data, upsert=True):
         sql_statement = "INSERT INTO `curw_corona`.`patient_data` (`Patient_No`,`Confirmed_Date`,`Confined_Date`," \
                         "`Symptoms_Start_Date`,`Symptoms_Start_Location`,`Residence_City`,`Detected_City`," \
                         "`Detected_Prefecture`,`Gender`,`Age`,`Transmission_Type`,`Status`,`Notes`) VALUES " \
-                        "(%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s) ON DUPLICATE KEY UPDATE " \
+                        "(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE " \
                         "`Confirmed_Date` = VALUES(`Confirmed_Date`),`Confined_Date` = VALUES(`Confined_Date`)," \
                         "`Symptoms_Start_Date` = VALUES(`Symptoms_Start_Date`)," \
                         "`Symptoms_Start_Location` = VALUES(`Symptoms_Start_Location`)," \
@@ -115,7 +115,7 @@ def bulk_insert_patient_data(pool, data, upsert=True):
         sql_statement = "INSERT INTO `curw_corona`.`patient_data` (`Patient_No`,`Confirmed_Date`,`Confined_Date`," \
                         "`Symptoms_Start_Date`,`Symptoms_Start_Location`,`Residence_City`,`Detected_City`," \
                         "`Detected_Prefecture`,`Gender`,`Age`,`Transmission_Type`,`Status`,`Notes`) VALUES " \
-                        "(%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s,%,s);"
+                        "(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);"
 
     print(sql_statement)
 
@@ -198,7 +198,7 @@ def bulk_insert_patient_data_customized(pool, data, upsert=True, Patient_No=True
         update_list.append("`Notes` = VALUES(`Notes`)")
 
     variables = ",".join(variable_list)
-    values = ",".join("%s" * len(value_list))
+    values = ",".join(["%s"] * len(value_list))
     updates = ",".join(update_list)
 
 

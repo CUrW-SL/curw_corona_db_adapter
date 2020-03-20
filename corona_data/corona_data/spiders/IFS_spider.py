@@ -55,9 +55,9 @@ class IFSSpider(scrapy.Spider):
                     list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
                     print(list)
                     if len(list) > 0:
-                        row.append(str(list[0]))
+                        row.append(list[0])
                     else:
-                        row.append('NULL')
+                        row.append('None')
 
                 data.append(','.join(row))
 
