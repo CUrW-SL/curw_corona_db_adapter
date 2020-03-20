@@ -4,7 +4,9 @@ import json
 url = "http://www.hpb.health.gov.lk/api/get-current-statistical"
 
 response = requests.get(url)
+test = response.text
 
-data = response.text
+response_dict = json.loads(test)
 
-print(data)
+
+data = response_dict.get('data')
