@@ -52,7 +52,7 @@ if __name__=="__main__":
 
         data = read_csv(os.path.join(ROOT_DIR, 'corona_data/IFS.csv'))
 
-        bulk_insert_patient_data_customized(pool=pool, data=data, upsert=True, Patient_No=True, Confirmed_Date=True,
+        bulk_insert_patient_data_customized(pool=pool, data=data, upsert=False, Patient_No=True, Confirmed_Date=True,
                                             Residence_City=True, Detected_City=True, Detected_Prefecture=True,
                                             Gender=True, Age=True,  Status=True, Notes=True)
         
