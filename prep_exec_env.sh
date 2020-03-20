@@ -20,8 +20,9 @@ source venv/bin/activate
 # Install dependencies using pip.
 if [ ! -f "db.log" ]
 then
-    echo "Installing PyMySQL"
     pip install PyMySQL
+    pip install Scrapy
+    pip install DBUtils
 fi
 
 # Deactivating virtual environment
