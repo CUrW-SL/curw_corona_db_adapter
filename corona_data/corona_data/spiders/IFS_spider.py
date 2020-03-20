@@ -42,16 +42,17 @@ class IFSSpider(scrapy.Spider):
         else:
             append_to_file('latest_update.txt', ['', website_latest_update])
 
-            file_name = 'IFS.csv'
+            patient_file_name = 'IFS_patient.csv'
+            prefecture_file_name = 'IFS_prefecture.csv'
 
-            col_index = [1, 2, 6, 7, 8, 5, 4, 9, 11]
-            data = ['Patient_No, Confirmed_Date, Residence_City, Detected_City, Detected_Prefecture, Gender, Age, Status, Notes']
+            patient_col_index = [1, 2, 6, 7, 8, 5, 4, 9, 11]
+            patient_data = ['Patient_No, Confirmed_Date, Residence_City, Detected_City, Detected_Prefecture, Gender, Age, Status, Notes']
 
-            length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
+            length = len(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall())
 
-            for i in range(3, length+3):
+            for i in range(3, length+2):
                 row = []
-                for j in col_index:
+                for j in patient_col_index:
                     list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
                     print(list)
                     if len(list) > 0:
@@ -62,8 +63,28 @@ class IFSSpider(scrapy.Spider):
                         else:
                             row.append('NULL')
 
-                data.append(','.join(row))
+                patient_data.append(','.join(row))
 
-            write_to_file(file_name, data)
+            write_to_file(patient_file_name, patient_data)
+
+            prefecture_col_index = [1, 3, 4, 5]
+            prefecture_data = ['Prefecture', 'Cases', 'Recovered', 'Deaths']
+
+            length = len(response.xpath('//*[@id="1399411442"]/div/table/tbody/tr/td[1]/text()').getall())
+
+            for i in range(3, length + 2):
+                row = []
+                for j in prefecture_col_index:
+                    list = response.xpath('//*[@id="1399411442"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
+                    print(list)
+                    if len(list) > 0:
+                        row.append(str(list[0]))
+                    else:
+                        row.append(str(0))
+
+                prefecture_data.append(','.join(row))
+
+            write_to_file(prefecture_file_name, prefecture_data)
+
 
 

@@ -1,0 +1,1 @@
+from .prefecture_data import bulk_insert_prefecture_data
