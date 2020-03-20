@@ -36,7 +36,7 @@ class IFSSpider(scrapy.Spider):
 
         length = int(response.xpath('//*[@id="0"]/div/table/tbody/tr/td[1]/text()').getall()[-1])
 
-        for i in range(3, length+2):
+        for i in range(3, length+3):
             row = []
             for j in col_index:
                 list = response.xpath('//*[@id="0"]/div/table/tbody/tr[{}]/td[{}]/text()'.format(i, j)).getall()
