@@ -58,7 +58,7 @@ class IFSSpider(scrapy.Spider):
                         row.append("\"" + list[0]+ "\"")
                     else:
                         if j==4:
-                            row.append(0)
+                            row.append('0')
                         else:
                             row.append('NULL')
 
