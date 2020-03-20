@@ -12,7 +12,7 @@ import db_utils
 
 from db_utils.base import get_Pool, destroy_Pool
 from corona_data2 import get_hpb_data
-from db_utils.hospital_data import bulk_insert_hospital_data
+from db_utils.hospital_data import bulk_insert_hospital_data, insert_summary
 ROOT_DIR = '/home/uwcc-admin/curw_corona_db_adapter'
 
 
@@ -55,7 +55,9 @@ if __name__=="__main__":
         bulk_insert_hospital_data(pool=pool, data=data.get('hospitals'), upsert=True, id=True, hospital_name=True, cumulative_local=True,
                                       cumulative_foreign=True, treatment_local=True, treatment_foreign=True,
                                       cumulative_total=True, treatment_total=True)
-        
+
+        insert_summary(pool=pool, data=data.get('summary'), upsert=True)
+
     except Exception as e:
         traceback.print_exc()
     finally:

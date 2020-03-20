@@ -59,9 +59,17 @@ def get_hpb_data():
         global_new_deaths = data.get('global_new_deaths')
         global_recovered = data.get('global_recovered')
 
-        summary = [local_new_cases, local_total_cases, local_total_number_of_individuals_in_hospitals, local_deaths,
-                   local_new_deaths, local_recovered, global_new_cases, global_total_cases, global_deaths,
-                   global_new_deaths, global_recovered]
+        summary = [["local_new_cases", local_new_cases],
+                   ["local_total_cases", local_total_cases],
+                   ["local_total_number_of_individuals_in_hospitals", local_total_number_of_individuals_in_hospitals],
+                   ["local_deaths", local_deaths],
+                   ["local_new_deaths", local_new_deaths],
+                   ["local_recovered", local_recovered],
+                   ["global_new_cases", global_new_cases],
+                   ["global_total_cases", global_total_cases],
+                   ["global_deaths", global_deaths],
+                   ["global_new_deaths", global_new_deaths],
+                   ["global_recovered", global_recovered]]
 
         # hospital based data
         hospital_data = data.get('hospital_data')

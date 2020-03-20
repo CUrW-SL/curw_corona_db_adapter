@@ -1,1 +1,1 @@
-from .hospital_data import bulk_insert_hospital_data
+from .hospital_data import bulk_insert_hospital_data, insert_summary
