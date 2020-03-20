@@ -57,7 +57,7 @@ class IFSSpider(scrapy.Spider):
                     if len(list) > 0:
                         row.append("\"" + list[0]+ "\"")
                     else:
-                        row.append('None')
+                        row.append('null')
 
                 data.append(','.join(row))
 
