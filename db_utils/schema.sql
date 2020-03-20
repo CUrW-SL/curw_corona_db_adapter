@@ -1,8 +1,8 @@
 CREATE TABLE `patient_data` (
   `Patient_No` int(11) NOT NULL,
-  `Confirmed_Date` datetime DEFAULT NULL,
-  `Confined_Date` datetime DEFAULT NULL,
-  `Symptoms_Start_Date` datetime DEFAULT NULL,
+  `Confirmed_Date` date DEFAULT NULL,
+  `Confined_Date` date DEFAULT NULL,
+  `Symptoms_Start_Date` date DEFAULT NULL,
   `Symptoms_Start_Location` varchar(45) DEFAULT NULL,
   `Residence_City` varchar(45) DEFAULT NULL,
   `Detected_City` varchar(45) DEFAULT NULL,
