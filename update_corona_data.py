@@ -60,7 +60,7 @@ if __name__=="__main__":
                 row[-3] = int(row[-3])
             processed_data.append([None if v is 'None' else v for v in row])
 
-
+        print("processed data", processed_data)
         bulk_insert_patient_data_customized(pool=pool, data=processed_data, upsert=True, Patient_No=True, Confirmed_Date=True,
                                             Residence_City=True, Detected_City=True, Detected_Prefecture=True,
                                             Gender=True, Age=True,  Status=True, Notes=True)
