@@ -6,7 +6,7 @@ source venv/bin/activate
 cd corona_data
 scrapy crawl ifs
 
-FILE_MODIFIED_TIME=$(date -r /home/uwcc-admin/curw_corona_db_adapter/corona_data/IFS.csv +%s)
+FILE_MODIFIED_TIME=$(date -r /home/uwcc-admin/curw_corona_db_adapter/corona_data/IFS_patient.csv +%s)
 CURRENT=$(date +%s)
 
 DIFF=$(((CURRENT-FILE_MODIFIED_TIME)/60))
