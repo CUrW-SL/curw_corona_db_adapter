@@ -71,6 +71,9 @@ def get_hpb_data():
                    ["global_new_deaths", global_new_deaths],
                    ["global_recovered", global_recovered]]
 
+        for i in range(len(summary)):
+            summary[i].insert(1, website_latest_update)
+
         # hospital based data
         hospital_data = data.get('hospital_data')
 
@@ -86,7 +89,7 @@ def get_hpb_data():
             treatment_total = hospital.get('treatment_total')
             hospital_name = (hospital.get('hospital')).get('name')
 
-            hospital_processed_data.append([id, hospital_name, cumulative_local, cumulative_foreign, treatment_local,
+            hospital_processed_data.append([id, website_latest_update, hospital_name, cumulative_local, cumulative_foreign, treatment_local,
                                             treatment_foreign, cumulative_total, treatment_total])
 
         processed_data = {

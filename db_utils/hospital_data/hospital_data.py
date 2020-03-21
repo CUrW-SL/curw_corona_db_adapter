@@ -6,11 +6,11 @@ def insert_summary(pool, data, upsert=True):
     connection = pool.connection()
 
     if upsert:
-        sql_statement = "INSERT INTO `curw_corona`.`summary` (`label`,`count`) VALUES " \
-                        "(%s,%s) ON DUPLICATE KEY UPDATE `count` = VALUES(`count`);"
+        sql_statement = "INSERT INTO `curw_corona`.`summary` (`label`,`time`,`count`) VALUES " \
+                        "(%s,%s,%s) ON DUPLICATE KEY UPDATE `count` = VALUES(`count`);"
 
     else:
-        sql_statement = "INSERT INTO `curw_corona`.`summary` (`label`,`count`) VALUES (%s,%s);"
+        sql_statement = "INSERT INTO `curw_corona`.`summary` (`label`,`time`,`count`) VALUES (%s,%s,%s);"
 
     print(sql_statement)
 
@@ -29,7 +29,7 @@ def insert_summary(pool, data, upsert=True):
             connection.close()
 
 
-def bulk_insert_hospital_data(pool, data, upsert=True, id=True, hospital_name=False, cumulative_local=False,
+def bulk_insert_hospital_data(pool, data, upsert=True, id=True, time=True, hospital_name=False, cumulative_local=False,
                               cumulative_foreign=False, treatment_local=False, treatment_foreign=False,
                               cumulative_total=False, treatment_total=False):
 
@@ -42,6 +42,8 @@ def bulk_insert_hospital_data(pool, data, upsert=True, id=True, hospital_name=Fa
     update_list = []
     variable_list.append("`id`")
     value_list.append("id")
+    value_list.append("`time`")
+    value_list.append("time")
 
     if hospital_name:
         variable_list.append("`hospital_name`")
