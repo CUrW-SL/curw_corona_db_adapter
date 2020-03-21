@@ -44,7 +44,7 @@ class IFSSpider(scrapy.Spider):
             append_to_file('latest_update.txt', ['', website_latest_update])
 
             # Mar 20 2020, 12:36 IST %Y-%m-%d %H:%M:%S
-            website_latest_update_time  = datetime.strptime(website_latest_update, "%b %d %Y, %H:%M")
+            website_latest_update_time  = datetime.strptime(website_latest_update.split(" IST")[0], "%b %d %Y, %H:%M")
             latest_update_time = website_latest_update_time.strftime(COMMON_DATE_TIME_FORMAT)
 
             patient_file_name = 'IFS_patient.csv'
