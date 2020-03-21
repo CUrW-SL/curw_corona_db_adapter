@@ -42,7 +42,7 @@ def bulk_insert_hospital_data(pool, data, upsert=True, id=True, time=True, hospi
     update_list = []
     variable_list.append("`id`")
     value_list.append("id")
-    value_list.append("`time`")
+    variable_list.append("`time`")
     value_list.append("time")
 
     if hospital_name:
