@@ -54,9 +54,13 @@ if __name__=="__main__":
 
         if data is not None:
 
-            bulk_insert_hospital_data(pool=pool, data=data.get('hospitals'), upsert=True, id=True, hospital_name=True, cumulative_local=True,
-                                          cumulative_foreign=True, treatment_local=True, treatment_foreign=True,
-                                          cumulative_total=True, treatment_total=True)
+            print("###########HOSPITALS:\n", data.get('hospitals'))
+            print("###########SUMMARY:\n", data.get('summary'))
+
+            bulk_insert_hospital_data(pool=pool, data=data.get('hospitals'), upsert=True, id=True, time=True,
+                                      hospital_name=True, cumulative_local=True, cumulative_foreign=True,
+                                      treatment_local=True, treatment_foreign=True, cumulative_total=True,
+                                      treatment_total=True)
 
             insert_summary(pool=pool, data=data.get('summary'), upsert=True)
 
