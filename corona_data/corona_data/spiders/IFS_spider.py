@@ -1,5 +1,6 @@
 import scrapy
 from datetime import datetime, timedelta
+COMMON_DATE_TIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 
 
 def write_to_file(file_name, data):
@@ -42,6 +43,10 @@ class IFSSpider(scrapy.Spider):
         else:
             append_to_file('latest_update.txt', ['', website_latest_update])
 
+            # Mar 20 2020, 12:36 IST %Y-%m-%d %H:%M:%S
+            website_latest_update_time  = datetime.strptime(website_latest_update, "%b %d %Y, %H:%M")
+            latest_update_time = website_latest_update_time.strftime(COMMON_DATE_TIME_FORMAT)
+
             patient_file_name = 'IFS_patient.csv'
             prefecture_file_name = 'IFS_prefecture.csv'
 
@@ -68,7 +73,7 @@ class IFSSpider(scrapy.Spider):
             write_to_file(patient_file_name, patient_data)
 
             prefecture_col_index = [1, 3, 4, 5]
-            prefecture_data = ['Prefecture, Cases, Recovered, Deaths']
+            prefecture_data = ['Prefecture, time, Cases, Recovered, Deaths']
 
             length = len(response.xpath('//*[@id="1399411442"]/div/table/tbody/tr/td[1]/text()').getall())
 
@@ -82,6 +87,7 @@ class IFSSpider(scrapy.Spider):
                     else:
                         row.append(str(0))
 
+                row.insert(1, latest_update_time)
                 prefecture_data.append(','.join(row))
 
             write_to_file(prefecture_file_name, prefecture_data)

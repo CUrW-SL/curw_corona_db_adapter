@@ -8,13 +8,13 @@ def bulk_insert_prefecture_data(pool, data, upsert=True):
     connection = pool.connection()
 
     if upsert:
-        sql_statement = "INSERT INTO `curw_corona`.`prefecture_data` (`Prefecture`,`Cases`,`Recovered`,`Deaths`) " \
-                        "VALUES (%s,%s,%s,%s) ON DUPLICATE KEY UPDATE " \
+        sql_statement = "INSERT INTO `curw_corona`.`prefecture_data` (`Prefecture`,`time`,`Cases`,`Recovered`,`Deaths`) " \
+                        "VALUES (%s,%s,%s,%s,%s) ON DUPLICATE KEY UPDATE " \
                         "`Cases` = VALUES(`Cases`),`Recovered` = VALUES(`Recovered`),`Deaths` = VALUES(`Deaths`);"
 
     else:
-        sql_statement = "INSERT INTO `curw_corona`.`prefecture_data` (`Prefecture`,`Cases`,`Recovered`,`Deaths`) " \
-                        "VALUES (%s,%s,%s,%s);"
+        sql_statement = "INSERT INTO `curw_corona`.`prefecture_data` (`Prefecture`,`time`,`Cases`,`Recovered`,`Deaths`) " \
+                        "VALUES (%s,%s,%s,%s,%s);"
 
     print(sql_statement)
 
